@@ -34,8 +34,16 @@ def checkPassword(incomePw, recordedPw):
     encoded_password = incomePw.encode('utf-8')
     user_password    = recordedPw.encode('utf-8')
     if not bcrypt.checkpw(encoded_password, user_password):
-        raise ValueError("INVALID_USER")
+        raise ValueError("INVALID_EMAIL OR INVALID_PASSWORD")
 
 def createToken(value):
     token = jwt.encode({'id': value}, settings.SECRET_KEY, settings.ALGORITHM)
     return token
+
+def checkEmailExist(value):
+    if User.objects.filter(email = value).exists():
+        raise ValueError("EXIST_EMAIL")
+
+def checkPhoneExist(value):
+    if User.objects.filter(phone_number = value).exists():
+        raise ValueError("EXIST_PHONE_NUMBER")
