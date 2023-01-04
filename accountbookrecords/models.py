@@ -10,7 +10,7 @@ class AccountBookRecord(TimeStampModel):
     description  = models.CharField(max_length=300)
     amount       = models.DecimalField(decimal_places=3, max_digits=15)
     balance      = models.DecimalField(decimal_places=3, max_digits=15)
-    is_deleted   = models.BooleanField()
+    is_deleted   = models.BooleanField(default = True)
     account_book = models.ForeignKey(AccountBook, on_delete = models.CASCADE)
     deleted_at   = models.DateTimeField(null = True, default = None)
 
