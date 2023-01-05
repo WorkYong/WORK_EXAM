@@ -3,6 +3,7 @@ from json.decoder         import JSONDecodeError
 
 from django.http          import JsonResponse
 from django.views         import View
+from django.utils         import timezone
 
 from accountbookrecords.models  import AccountBookRecord
 from core.utils           import LoginAccess 
@@ -12,13 +13,13 @@ class AccountBookRecordView(View):
     def post(self, request):
         try:
             data            = json.loads(request.body)
-            title           = data['title'],
-            date            = data['date'],
-            memo            = data['memo'],
-            description     = data['description'],
-            amount          = data['amount'],
-            balance         = data ['balance'],
-            account_book_id = data ['accountbook_id']
+            title           = data['title']
+            date            = data['date']
+            memo            = data['memo']
+            description     = data['description']
+            amount          = data['amount']
+            balance         = data['balance']
+            account_book_id = data['book_id']
             user_id         = request.user.id
 
             AccountBookRecord.objects.create(
@@ -62,19 +63,23 @@ class AccountBookRecordView(View):
     def patch(self, request):
         try:
             data           = json.loads(request.body)
-            accountbook_id = data['accountbook_id']
+            accountbookrecord_id = data['record_id']
+            is_deleted           = data['is_deleted']
 
-            accountbooks = AccountBook.objects.get(
-              id = accountbook_id, 
+            accountbookrecords = AccountBookRecord.objects.get(
+              id = accountbookrecord_id, 
               user_id = request.user.id)
 
-            accountbooks.is_deleted = data['is_deleted']
-            accountbooks.deleted_at = data['deleted_at']
-            accountbooks.save()
+            if  is_deleted == False:
+                accountbookrecords.is_deleted = False
+                accountbookrecords.deleted_at = timezone.now()
+                accountbookrecords.save()
+                
+                return JsonResponse({'is_deleted': accountbookrecords.is_deleted, 'deleted_at':accountbookrecords.deleted_at}, status = 200)
+            else :
+                return JsonResponse({'message' : "BAD REQUEST"}, status = 400) 
 
-            return JsonResponse({'is_deleted': accountbooks.is_deleted, 'deleted_at':accountbooks.deleted_at}, status = 200)
-
-        except AccountBook.DoesNotExist :
+        except AccountBookRecord.DoesNotExist :
           return JsonResponse({'message': 'Book_DoesNotExist'}, status = 400)
         except JSONDecodeError :
           return JsonResponse({'message':'JSON_DECODE_ERROR'}, status=400)
@@ -85,19 +90,21 @@ class AccountBookRecordView(View):
     def put(self, request):
         try:
             data           = json.loads(request.body)
-            accountbook_id = data['accountbook_id']
+            accountbookrecord_id = data['record_id']
 
-            accountbooks   = AccountBook.objects.get(
+
+            accountbookrecord   = AccountBookRecord.objects.get(
               user_id      = request.user.id,
-              id           = accountbook_id
+              id           = accountbookrecord_id
             )
 
-            accountbooks.book_name = data ['book_name']
-            accountbooks.save()
+            accountbookrecord.amount = data['amount']
+            accountbookrecord.memo = data['memo']
+            accountbookrecord.save()
             
-            return JsonResponse({'change_book_name': accountbooks.book_name}, status = 200)
+            return JsonResponse({'change_amount': accountbookrecord.amount, 'change_memo': accountbookrecord.memo}, status = 200)
 
-        except AccountBook.DoesNotExist :
+        except AccountBookRecord.DoesNotExist :
           return JsonResponse({'message': 'Book_DoesNotExist'}, status = 400)
         except JSONDecodeError :
           return JsonResponse({'message':'JSON_DECODE_ERROR'}, status=400)
