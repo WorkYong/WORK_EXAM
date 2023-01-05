@@ -55,9 +55,10 @@ class AccountBookView(View):
               user_id = request.user.id)
 
             accountbooks.is_deleted = data['is_deleted']
+            accountbooks.deleted_at = data['deleted_at']
             accountbooks.save()
 
-            return JsonResponse({'is_deleted': accountbooks.is_deleted}, status = 200)
+            return JsonResponse({'is_deleted': accountbooks.is_deleted, 'deleted_at':accountbooks.deleted_at}, status = 200)
 
         except AccountBook.DoesNotExist :
           return JsonResponse({'message': 'Book_DoesNotExist'}, status = 400)
