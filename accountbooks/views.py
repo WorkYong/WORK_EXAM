@@ -3,6 +3,7 @@ from json.decoder         import JSONDecodeError
 
 from django.http          import JsonResponse
 from django.views         import View
+from django.utils         import timezone
 
 from accountbooks.models  import AccountBook
 from core.utils           import LoginAccess , checkBookNameExist
@@ -48,17 +49,21 @@ class AccountBookView(View):
     def patch(self, request):
         try:
             data           = json.loads(request.body)
-            accountbook_id = data['accountbook_id']
-
+            accountbook_id = data['book_id']
+            is_deleted = data['is_deleted']
+            
             accountbooks = AccountBook.objects.get(
               id = accountbook_id, 
               user_id = request.user.id)
 
-            accountbooks.is_deleted = data['is_deleted']
-            accountbooks.deleted_at = data['deleted_at']
-            accountbooks.save()
-
-            return JsonResponse({'is_deleted': accountbooks.is_deleted, 'deleted_at':accountbooks.deleted_at}, status = 200)
+            if is_deleted == False :
+              accountbooks.is_deleted = False
+              accountbooks.deleted_at = timezone.now()
+              accountbooks.save()
+              
+              return JsonResponse({'is_deleted': accountbooks.is_deleted, 'deleted_at':accountbooks.deleted_at}, status = 200)
+            else :
+              return JsonResponse({'message' : "BAD REQUEST"}, status = 400) 
 
         except AccountBook.DoesNotExist :
           return JsonResponse({'message': 'Book_DoesNotExist'}, status = 400)
@@ -71,7 +76,7 @@ class AccountBookView(View):
     def put(self, request):
         try:
             data           = json.loads(request.body)
-            accountbook_id = data['accountbook_id']
+            accountbook_id = data['book_id']
 
             accountbooks   = AccountBook.objects.get(
               user_id      = request.user.id,
