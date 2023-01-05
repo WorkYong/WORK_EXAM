@@ -24,7 +24,8 @@ class AccountBookRecordView(View):
             balance         = data['balance']
             account_book_id = data['book_id']
             user_id         = request.user.id
-
+            serial_no       = uuid.uuid4()
+            
             AccountBookRecord.objects.create(
               title           = title,
               date            = date,
@@ -34,10 +35,10 @@ class AccountBookRecordView(View):
               balance         = balance,
               user_id         = user_id,
               account_book_id = account_book_id,
-              serial_no       = uuid.uuid4()
+              serial_no       = serial_no
 
             )
-            return JsonResponse({'message':'SUCCESS'}, status=201)
+            return JsonResponse({'message':'SUCCESS', 'RECORD_SERIAL_NO' : serial_no}, status=201)
             
         except KeyError:
             return JsonResponse({"message":"KEY_ERROR"}, status=400)
