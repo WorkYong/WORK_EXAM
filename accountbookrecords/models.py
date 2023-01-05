@@ -11,6 +11,7 @@ class AccountBookRecord(TimeStampModel):
     description  = models.CharField(max_length = 300)
     amount       = models.CharField(max_length = 200)
     balance      = models.CharField(max_length = 200)
+    serial_no    = models.CharField(max_length = 200)
     is_deleted   = models.BooleanField(default = True)
     account_book = models.ForeignKey(AccountBook, on_delete = models.CASCADE)
     user         = models.ForeignKey(User, on_delete = models.CASCADE)
