@@ -1,6 +1,7 @@
 from django.db import models
 
-from .models import AccountBook , User
+from users.models        import User
+from accountbooks.models import AccountBook
 from core.models         import TimeStampModel
 
 class AccountBookRecord(TimeStampModel): 
