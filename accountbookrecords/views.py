@@ -8,26 +8,28 @@ from accountbookrecords.models  import AccountBookRecord
 from core.utils           import LoginAccess 
 
 class AccountBookRecordView(View):
-    # @LoginAccess
+    @LoginAccess
     def post(self, request):
         try:
-            data        = json.loads(request.body)
-            title       = data['title'],
-            date        = data['date'],
-            memo        = data['memo'],
-            description = data['description'],
-            amount      = data['amount'],
-            balance     = data ['balance'],
-            # user_id     = request.user.id
+            data            = json.loads(request.body)
+            title           = data['title'],
+            date            = data['date'],
+            memo            = data['memo'],
+            description     = data['description'],
+            amount          = data['amount'],
+            balance         = data ['balance'],
+            account_book_id = data ['accountbook_id']
+            user_id         = request.user.id
 
             AccountBookRecord.objects.create(
-              title       = title,
-              date        = date,
-              memo        = memo,
-              description = description,
-              amount      = amount,
-              balance     = balance,
-              # user_id     = user_id
+              title           = title,
+              date            = date,
+              memo            = memo,
+              description     = description,
+              amount          = amount,
+              balance         = balance,
+              user_id         = user_id,
+              account_book_id = account_book_id
 
             )
             return JsonResponse({'message':'SUCCESS'}, status=201)
@@ -38,16 +40,21 @@ class AccountBookRecordView(View):
     @LoginAccess
     def get(self, request):
         
-        accountbooks = AccountBook.objects.filter(user=request.user)
+        accountbookrecords = AccountBookRecord.objects.filter(user=request.user)
         result = [
         {
-            'id'        : accountbook.id,
-            'book_name' : accountbook.book_name,
-            'is_deleted': accountbook.is_deleted,
-            'created_at': accountbook.created_at,
-            'updated_at': accountbook.updated_at,
+            'id'         : accountbookrecord.id,
+            'title'      : accountbookrecord.title,
+            'date'       : accountbookrecord.date,
+            'memo'       : accountbookrecord.memo,
+            'description': accountbookrecord.description,
+            'amount'     : accountbookrecord.amount,
+            'balance'    : accountbookrecord.balance,
+            'is_deleted' : accountbookrecord.is_deleted,
+            'created_at' : accountbookrecord.created_at,
+            'updated_at' : accountbookrecord.updated_at,
           
-        } for accountbook in accountbooks]
+        } for accountbookrecord in accountbookrecords]
           
         return JsonResponse({"result":result}, status = 200)
 
