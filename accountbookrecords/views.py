@@ -4,9 +4,11 @@ from json.decoder         import JSONDecodeError
 from django.http          import JsonResponse
 from django.views         import View
 from django.utils         import timezone
+from django.db.models     import Q
 
 from accountbookrecords.models  import AccountBookRecord
 from core.utils           import LoginAccess 
+from .shorturl            import shortUrl
 
 class AccountBookRecordView(View):
     @LoginAccess
@@ -41,7 +43,15 @@ class AccountBookRecordView(View):
     @LoginAccess
     def get(self, request):
         
-        accountbookrecords = AccountBookRecord.objects.filter(user=request.user)
+        account_book_id = request.GET.get('book_id')
+        user_id         = request.GET.get('user_id')
+        
+        if account_book_id :
+          queries = Q(account_book_id = account_book_id)
+          queries = Q(account_book_id__user_id = user_id)
+
+        accountbookrecords = AccountBookRecord.objects.filter(queries)
+        
         result = [
         {
             'id'         : accountbookrecord.id,
@@ -56,8 +66,11 @@ class AccountBookRecordView(View):
             'updated_at' : accountbookrecord.updated_at,
           
         } for accountbookrecord in accountbookrecords]
-          
+
+        # shortUrl() 단축URl이 만들어짐
         return JsonResponse({"result":result}, status = 200)
+
+        
 
     @LoginAccess
     def patch(self, request):
