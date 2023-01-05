@@ -8,7 +8,6 @@ from django.db.models     import Q
 
 from accountbookrecords.models  import AccountBookRecord
 from core.utils           import LoginAccess 
-from .shorturl            import shortUrl
 
 class AccountBookRecordView(View):
     @LoginAccess
@@ -67,7 +66,7 @@ class AccountBookRecordView(View):
           
         } for accountbookrecord in accountbookrecords]
 
-        # shortUrl() 단축URl이 만들어짐
+
         return JsonResponse({"result":result}, status = 200)
 
         
