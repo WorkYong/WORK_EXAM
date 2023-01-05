@@ -4,7 +4,8 @@ from functools   import wraps
 from django.conf import settings
 from django.http import JsonResponse
 
-from users.models    import User
+from users.models        import User
+from accountbooks.models import AccountBook
 
 def vaildNameRegex(value):
     REGEX_NAME     = '^[가-힣]{2,5}$'
@@ -47,3 +48,25 @@ def checkEmailExist(value):
 def checkPhoneExist(value):
     if User.objects.filter(phone_number = value).exists():
         raise ValueError("EXIST_PHONE_NUMBER")
+        
+def checkBookNameExist(value):
+    if AccountBook.objects.filter(book_name = value).exists():
+        raise ValueError("EXIST_BOOK_NAME")
+
+def LoginAccess(func):
+    @wraps(func)
+    def wrapper(self, request, *args, **kwargs):
+        try:
+            access_token = request.headers.get('Authorization', None)
+            payload      = jwt.decode(access_token, settings.SECRET_KEY, settings.ALGORITHM)
+            user         = User.objects.get(id = payload['id'])
+            request.user = user
+
+        except jwt.exceptions.DecodeError:
+            return JsonResponse({'message' : 'INVALID TOKEN'}, status = 400)
+
+        except User.DoesNotExist:
+            return JsonResponse({'message' : 'INVALID USER'}, status = 400)
+        return func(self, request, *args, **kwargs)
+
+    return wrapper
