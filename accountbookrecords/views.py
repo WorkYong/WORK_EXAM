@@ -1,9 +1,12 @@
 import json
+import uuid
+
 from json.decoder         import JSONDecodeError
 
 from django.http          import JsonResponse
 from django.views         import View
 from django.utils         import timezone
+from django.db.models     import Q
 
 from accountbookrecords.models  import AccountBookRecord
 from core.utils           import LoginAccess 
@@ -30,7 +33,8 @@ class AccountBookRecordView(View):
               amount          = amount,
               balance         = balance,
               user_id         = user_id,
-              account_book_id = account_book_id
+              account_book_id = account_book_id,
+              serial_no       = uuid.uuid4()
 
             )
             return JsonResponse({'message':'SUCCESS'}, status=201)
@@ -41,7 +45,22 @@ class AccountBookRecordView(View):
     @LoginAccess
     def get(self, request):
         
-        accountbookrecords = AccountBookRecord.objects.filter(user=request.user)
+        account_book_id = request.GET.get('book_id')
+        serial_no       = request.GET.get('serial_no')
+        is_deleted      = request.GET.get('is_deleted')
+        queries         = Q()
+        
+        if account_book_id :
+            queries &= Q(account_book_id = account_book_id)
+
+        if serial_no :  
+            queries &= Q(serial_no = serial_no)
+
+        if is_deleted :
+            queries &= Q(is_deleted = is_deleted)
+
+        accountbookrecords = AccountBookRecord.objects.filter(queries)
+        
         result = [
         {
             'id'         : accountbookrecord.id,
@@ -56,8 +75,11 @@ class AccountBookRecordView(View):
             'updated_at' : accountbookrecord.updated_at,
           
         } for accountbookrecord in accountbookrecords]
-          
+
+
         return JsonResponse({"result":result}, status = 200)
+
+        
 
     @LoginAccess
     def patch(self, request):
@@ -102,7 +124,7 @@ class AccountBookRecordView(View):
             accountbookrecord.memo = data['memo']
             accountbookrecord.save()
             
-            return JsonResponse({'change_amount': accountbookrecord.amount, 'change_memo': accountbookrecord.memo}, status = 200)
+            return JsonResponse({'CHANGE_AMOUNT': accountbookrecord.amount, 'CHANGE_MEMO': accountbookrecord.memo}, status = 200)
 
         except AccountBookRecord.DoesNotExist :
           return JsonResponse({'message': 'Book_DoesNotExist'}, status = 400)
