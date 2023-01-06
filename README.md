@@ -221,6 +221,5 @@ QueryString이기 떄문에 URL이 겹치지 않습니다.
 <summary>6.API docs</summary>
 
 ## API doc
-
-박정용 - [https://documenter.getpostman.com/view/22727251/2s83zfQ5Ti]()
+[https://repeated-cosmonaut-832.notion.site/payhere-AccountBook-78d0f08c042c42a1a7fb57353c9b0f73]
 </details>
