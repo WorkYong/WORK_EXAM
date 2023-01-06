@@ -128,3 +128,39 @@ class AccountBookRecordView(View):
           return JsonResponse({'message':'JSON_DECODE_ERROR'}, status = 400)
         except KeyError:
           return JsonResponse({'message':'KEY_ERROR'}, status = 400)
+
+class AccountBookRecordDataCopyView(View):
+    @LoginAccess
+    def post(self, request):
+        try:
+            data                = json.loads(request.POST.get('data'))
+            title               = data.get('title')
+            date                = data.get('date')
+            memo                = data.get('memo')
+            description         = data.get('description')
+            amount              = data.get('amount')
+            balance             = data.get('balance')
+            serial_no           = data.get('serial_no')
+            account_book_id     = data.get('book_id')
+            user                = request.user
+
+            AccountBookRecord.objects.create(
+                title           = title,
+                date            = date,
+                memo            = memo,
+                description     = description,
+                amount          = amount,
+                balance         = balance,
+                serial_no       = serial_no,
+                account_book_id = account_book_id,
+                user            = user
+
+            ) 
+
+            return JsonResponse({"message":"SUCCESS"},status=200)
+
+        except KeyError:
+            return JsonResponse({"message":"KEY_ERROR"}, status = 400)
+        except AccountBookRecord.DoesNotExist:
+            return JsonResponse({"message":"BookRecord_DoesNotExist"}, status = 400)
+
