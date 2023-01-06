@@ -9,7 +9,7 @@ from django.utils         import timezone
 from django.db.models     import Q
 
 from accountbookrecords.models  import AccountBookRecord
-from core.utils           import LoginAccess 
+from core.utils           import LoginAccess , shortUrl
 
 class AccountBookRecordView(View):
     @LoginAccess
@@ -77,8 +77,8 @@ class AccountBookRecordView(View):
           
         } for accountbookrecord in accountbookrecords]
 
-
-        return JsonResponse({"result":result}, status = 200)
+        shortUrl(account_book_id, serial_no, is_deleted)
+        return JsonResponse({"result":result, "short_url":shortUrl(account_book_id, serial_no, is_deleted)}, status = 200)
 
         
 
