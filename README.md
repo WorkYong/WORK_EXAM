@@ -89,7 +89,7 @@ $ python manage.py runserver 0:8000
 </details>
 
 <details>
-<summary>2.가계부(로그인시만가능)</summary>
+<summary>2. 가계부(로그인시만가능)</summary>
 
 - 가계부 생성하기
 ```shell    
@@ -121,7 +121,7 @@ $ python manage.py runserver 0:8000
 </details>
 
 <details>
-<summary>3.가계부 상세내역(로그인시만 가능)</summary>
+<summary>3. 가계부 상세내역(로그인시만 가능)</summary>
 
 - 가계부 상세내역 생성하기
 ```shell
@@ -227,7 +227,7 @@ QueryStringParameter의 값이 변화하기 떄문에 URL이 겹치지 않습니
 </div>
 </details>
 <details>
-<summary>6.API docs</summary>
+<summary>6. API docs</summary>
 
 ## API doc
 [https://repeated-cosmonaut-832.notion.site/payhere-AccountBook-78d0f08c042c42a1a7fb57353c9b0f73]
