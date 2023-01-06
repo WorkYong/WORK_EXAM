@@ -2,9 +2,9 @@ import re, jwt, bcrypt
 
 import pyshorteners as ps
 
-from functools   import wraps
-from django.conf import settings
-from django.http import JsonResponse
+from functools           import wraps
+from django.conf         import settings
+from django.http         import JsonResponse
 
 from users.models        import User
 from accountbooks.models import AccountBook
@@ -75,12 +75,12 @@ def LoginAccess(func):
 
 def shortUrl(value1, value2, value3):
 
-    book_id = value1
-    serial_no = value2
+    book_id    = value1
+    serial_no  = value2
     is_deleted = value3
     
-    link = f'localhost:8000/accountbookrecord?book_id={book_id}&serial_no={serial_no}&is_delted={is_deleted}'
-    sh = ps.Shortener()
-    short_url = (sh.tinyurl.short(link))
+    link       = f'localhost:8000/accountbookrecord?book_id={book_id}&serial_no={serial_no}&is_delted={is_deleted}'
+    sh         = ps.Shortener()
+    short_url  = (sh.tinyurl.short(link))
     
     return short_url
