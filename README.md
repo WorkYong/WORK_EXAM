@@ -162,13 +162,19 @@ $ python manage.py runserver 0:8000
 QueryString이기 떄문에 URL이 겹치지 않습니다.
 ```  
 - 가계부 상세내역 복제하기
-
-4.  테스트코드
-
----
-
-       요청과 응답에 대한 자세한 결과, 데이터 타입은 API docs를 참고해 주십시오.
+</details>
+<details>
+<summary>4. 테스트코드</summary>
+</details>
+<details>
+<summary>5. 요청과 응답에 대한 자세한 결과</summary>
+- 회원가입
+![image]https://user-images.githubusercontent.com/102202607/211005451-718c2c78-0803-42f0-9af3-bcbeb5be6700.png
+</details>
+<details>
+<summary>6.API docs</summary>
 
 ## API doc
 
 박정용 - [https://documenter.getpostman.com/view/22727251/2s83zfQ5Ti]()
+</details>
