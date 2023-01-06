@@ -6,13 +6,12 @@ from django.http   import JsonResponse
 from django.views  import View
 
 from users.models  import User
-from core.utils import *
+from core.utils    import *
 
 class SignUpView(View):
     def post(self, request):
         try:
-            data           = json.loads(request.body)
-
+            data         = json.loads(request.body)
             name         = data['name']
             email        = data['email']
             password     = data['password']
@@ -46,23 +45,23 @@ class LoginView(View):
             user     = User.objects.get(email=email)
 
             checkPassword(password, user.password)
-            return JsonResponse({'message': 'SUCCESS', 'access_token': createToken(user.id), 'name': user.name}, status=201)
+            return JsonResponse({'message':'SUCCESS', 'access_token':createToken(user.id), 'name':user.name}, status=201)
             
         except KeyError:
-            return JsonResponse({'message': 'KEY_ERROR'}, status=400)
+            return JsonResponse({'message':'KEY_ERROR'}, status = 400)
 
         except ValueError:
-            return JsonResponse({'message': 'INVALID_USER'}, status=401)
+            return JsonResponse({'message':'INVALID_USER'}, status = 401)
 
         except User.DoesNotExist:
-            return JsonResponse({'message': 'User_DoesNotExist'}, status=404)
+            return JsonResponse({'message':'User_DoesNotExist'}, status = 404)
 
 class UserView(View):
     @LoginAccess
     def patch(self, request):
         try:
-            data      = json.loads(request.body)
-            user_id   = data['user_id']
+            data            = json.loads(request.body)
+            user_id         = data['user_id']
             
             users = User.objects.get(id = user_id) 
           
@@ -72,8 +71,8 @@ class UserView(View):
             return JsonResponse({'message':'DELETED'}, status = 200)
 
         except User.DoesNotExist :
-          return JsonResponse({'message': 'User_DoesNotExist'}, status = 400)
+          return JsonResponse({'message':'User_DoesNotExist'}, status = 400)
         except JSONDecodeError :
-          return JsonResponse({'message':'JSON_DECODE_ERROR'}, status=400)
+          return JsonResponse({'message':'JSON_DECODE_ERROR'}, status = 400)
         except KeyError:
-          return JsonResponse({'message':'KEY_ERROR'}, status=400)
+          return JsonResponse({'message':'KEY_ERROR'}, status = 400)
