@@ -224,8 +224,8 @@ QueryStringParameter의 값이 변화하기 떄문에 URL이 겹치지 않습니
     <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211005491-92e17233-fc89-495a-969c-83318f90c403.png">
   </li>
   <li>
-    <p>가계부 상세내역 </p>
-    <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211005491-92e17233-fc89-495a-969c-83318f90c403.png">
+    <p>가계부 상세내역 복제하기 </p>
+    <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211076584-6891e9c7-ebf5-42d0-8e51-ed86783b077b.png">
   </li>
 </ul>
 </div>
