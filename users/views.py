@@ -58,6 +58,7 @@ class LoginView(View):
             return JsonResponse({'message': 'User_DoesNotExist'}, status=404)
 
 class UserView(View):
+    @LoginAccess
     def patch(self, request):
         try:
             data      = json.loads(request.body)
