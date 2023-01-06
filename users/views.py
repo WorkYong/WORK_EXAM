@@ -1,5 +1,7 @@
 import json
 
+from json          import JSONDecodeError
+
 from django.http   import JsonResponse
 from django.views  import View
 
@@ -54,3 +56,24 @@ class LoginView(View):
 
         except User.DoesNotExist:
             return JsonResponse({'message': 'User_DoesNotExist'}, status=404)
+
+class UserView(View):
+    @LoginAccess
+    def patch(self, request):
+        try:
+            data      = json.loads(request.body)
+            user_id   = data['user_id']
+            
+            users = User.objects.get(id = user_id) 
+          
+            users.is_active = data ['is_active']
+            users.save()
+            
+            return JsonResponse({'message':'DELETED'}, status = 200)
+
+        except User.DoesNotExist :
+          return JsonResponse({'message': 'User_DoesNotExist'}, status = 400)
+        except JSONDecodeError :
+          return JsonResponse({'message':'JSON_DECODE_ERROR'}, status=400)
+        except KeyError:
+          return JsonResponse({'message':'KEY_ERROR'}, status=400)
