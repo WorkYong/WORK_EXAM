@@ -16,8 +16,7 @@ class AccountBookRecord(TimeStampModel):
     account_book = models.ForeignKey(AccountBook, on_delete = models.CASCADE)
     user         = models.ForeignKey(User, on_delete = models.CASCADE)
     deleted_at   = models.DateTimeField(null = True, default = None)
-
-    
+   
     class Meta:
         db_table = 'accountbookrecords'
 
