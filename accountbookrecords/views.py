@@ -78,7 +78,7 @@ class AccountBookRecordView(View):
         } for accountbookrecord in accountbookrecords]
 
         shortUrl(account_book_id, serial_no, is_deleted)
-        return JsonResponse({"result":result}, status = 200)
+        return JsonResponse({"result":result, "short_url":shortUrl(account_book_id, serial_no, is_deleted)}, status = 200)
 
         
 

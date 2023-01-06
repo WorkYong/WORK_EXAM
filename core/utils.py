@@ -83,4 +83,4 @@ def shortUrl(value1, value2, value3):
     sh = ps.Shortener()
     short_url = (sh.tinyurl.short(link))
     
-    return print(short_url)
+    return short_url
