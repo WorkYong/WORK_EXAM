@@ -216,11 +216,15 @@ QueryStringParameter의 값이 변화하기 떄문에 URL이 겹치지 않습니
     <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211005488-e7d29739-913c-44d0-a9f5-35e767a25377.png">
   </li>
   <li>
-    <p>가계부 기록 수정</p>
+    <p>가계부 상세내역 수정</p>
     <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211005490-78ee1c10-377f-4b74-bc08-dd929de303f5.png">
   </li>
   <li>
-    <p>가계부 기록 삭제</p>
+    <p>가계부 상세내역 삭제</p>
+    <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211005491-92e17233-fc89-495a-969c-83318f90c403.png">
+  </li>
+  <li>
+    <p>가계부 상세내역 </p>
     <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211005491-92e17233-fc89-495a-969c-83318f90c403.png">
   </li>
 </ul>
