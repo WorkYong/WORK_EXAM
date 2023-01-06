@@ -168,8 +168,54 @@ QueryString이기 떄문에 URL이 겹치지 않습니다.
 </details>
 <details>
 <summary>5. 요청과 응답에 대한 자세한 결과</summary>
-- 회원가입
-![image]https://user-images.githubusercontent.com/102202607/211005451-718c2c78-0803-42f0-9af3-bcbeb5be6700.png
+<div markdown="1">
+<ul>
+  <li>
+    <p>회원가입</p>
+    <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211005451-718c2c78-0803-42f0-9af3-bcbeb5be6700.png">
+  </li>
+  <li>
+    <p>로그인</p>
+    <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211005459-b0783501-cf81-48f4-bfe4-de6dd1e7cca0.png">
+  </li>
+  <li>
+    <p>회원 탈퇴(soft delete)</p>
+    <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211005465-aff65ff9-428b-4f70-97b7-b18b2c6e38a5.png">
+  </li>
+  <li>
+    <p>가계부 생성</p>
+    <img width="800" alt="image" src="https://user-images.githubusercontent.com/102202607/211005469-ff41cc63-ae6e-4f32-bd67-25ddd505683d.png">
+  </li>
+  <li>
+    <p>가계부 조회</p>
+    <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211005474-6446edc7-30ea-4485-b94f-7f957157daf7.png">
+  </li>
+  <li>
+    <p>가계부 수정</p>
+    <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211005478-cd58d795-cf0a-4e11-b229-8a9fbc334bca.png">
+  </li>
+  <li>
+    <p>가계부 삭제(soft_delete)</p>
+    <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211005481-61dec8aa-8a0c-4c44-97b3-37ac05a122be.png">
+  </li>
+  <li>
+    <p>가계부 상세내역 생성</p>
+    <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211005482-953ac4cf-b28b-40c9-9c8f-61c426de1df6.png">
+  </li>
+  <li>
+    <p>가계부 상세내역 조회</p>
+    <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211005488-e7d29739-913c-44d0-a9f5-35e767a25377.png">
+  </li>
+  <li>
+    <p>가계부 기록 수정</p>
+    <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211005490-78ee1c10-377f-4b74-bc08-dd929de303f5.png">
+  </li>
+  <li>
+    <p>가계부 기록 삭제</p>
+    <img width="800" alt="" src="https://user-images.githubusercontent.com/102202607/211005491-92e17233-fc89-495a-969c-83318f90c403.png">
+  </li>
+</ul>
+</div>
 </details>
 <details>
 <summary>6.API docs</summary>
