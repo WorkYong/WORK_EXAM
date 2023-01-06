@@ -11,6 +11,14 @@ from django.db.models     import Q
 from accountbookrecords.models  import AccountBookRecord
 from core.utils           import LoginAccess , shortUrl
 
+'''
+가계부 상세내역
+POST : 생성
+GET : 조회
+PATCH : 삭제
+PUT : 수정
+
+'''
 class AccountBookRecordView(View):
     @LoginAccess
     def post(self, request):
@@ -42,6 +50,15 @@ class AccountBookRecordView(View):
         except KeyError:
             return JsonResponse({"message":"KEY_ERROR"}, status = 400)
     
+    '''
+    QueryStringParameter를 사용하여 원하는 정보를 용이하게 가져오게 만들었습니다.
+    Get방식으로 인하여 URL의 노출되는 값들을 보완하고자 serial_no를 만들었습니다.
+    serial_no은 가계부 상세내역을 생성하게되면 uuid모듈을 통하여 16자리의 랜덤의 값이
+    생성되게됩니다. 생성된 serial_no를 클라이언트 측에 반환하여 알려줍니다. 그 sereal_no 값을
+    QueryStringParameter에 넣어서 사용자가 URL을 임의로 수정하여도 전혀 예측할 수 없게 하여
+    가계부 상세내역의 정보가 보여지지 않게 보안적인 측면을 고려하였습니다.
+
+    '''
     @LoginAccess
     def get(self, request):
         account_book_id = request.GET.get('book_id')
@@ -128,7 +145,14 @@ class AccountBookRecordView(View):
           return JsonResponse({'message':'JSON_DECODE_ERROR'}, status = 400)
         except KeyError:
           return JsonResponse({'message':'KEY_ERROR'}, status = 400)
+'''
+가계부 상세내역 복제
+POST : 상세내역 복제 생성
 
+POST.get을 사용한 이유는 data양이 일단 방대하고 그 값들을 DB에 생성하기 위해서입니다.
+만약 그냥 POST를 사용하였다면 일일히 body에 KEY값과 VALUE를 입력하여 받아오지만.
+POST.get을 사용하여 form_data형태의 data를 받아 올 수 있게 되었습니다.
+'''
 class AccountBookRecordDataCopyView(View):
     @LoginAccess
     def post(self, request):

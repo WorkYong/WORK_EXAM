@@ -9,6 +9,18 @@ from django.http         import JsonResponse
 from users.models        import User
 from accountbooks.models import AccountBook
 
+'''
+api에 필요한 유틸리티를 함수화하여 보관하였습니다.
+
+이유는 코드의 가독성을 높이고 재활용 하기 위해서입니다.
+
+'''
+
+'''
+유효성검사
+
+'''
+
 def vaildNameRegex(value):
     REGEX_NAME     = '^[가-힣]{2,5}$'
     if not re.match(REGEX_NAME, value):
@@ -55,6 +67,10 @@ def checkBookNameExist(value):
     if AccountBook.objects.filter(book_name = value).exists():
         raise ValueError("EXIST_BOOK_NAME")
 
+'''
+로그인 검증
+'''
+
 def LoginAccess(func):
     @wraps(func)
     def wrapper(self, request, *args, **kwargs):
@@ -72,6 +88,10 @@ def LoginAccess(func):
         return func(self, request, *args, **kwargs)
 
     return wrapper
+
+'''
+단축url 만들기
+'''
 
 def shortUrl(value1, value2, value3):
 
