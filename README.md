@@ -147,7 +147,7 @@ $ python manage.py runserver 0:8000
 ```  
 - 가계부 상세내역 조회하기
 ```shell
-필수 요청값(book_id, is_deleted, serial_no) QueryString으로 요청 값으로 받습니다.
+※필수 요청값(book_id, is_deleted, serial_no) QueryString으로 요청 값으로 받습니다.
   요청된 값의 따라 정보를 조회할 수 있고 삭제된 데이터 또한 조회할 수 있습니다.
   
   그리고 QueryString의 단점인 URL에 노출되어 무분별하게 URL값을 변경하여 조회할 수 있는 사항이 우려되어
