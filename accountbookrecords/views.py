@@ -83,7 +83,7 @@ class AccountBookRecordView(View):
         try: 
             data                 = json.loads(request.body)
             accountbookrecord_id = data['record_id']
-            is_deleted           = data['is_deleted']
+            is_deleted           = False
 
             accountbookrecords   = AccountBookRecord.objects.get(
               id                 = accountbookrecord_id,
