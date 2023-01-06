@@ -63,8 +63,9 @@ class UserView(View):
             data            = json.loads(request.body)
             user_id         = data['user_id']
             
-            users           = User.objects.get(id = user_id) 
-            users.is_active = data ['is_active']
+            users = User.objects.get(id = user_id) 
+          
+            users.is_active = False
             users.save()
             
             return JsonResponse({'message':'DELETED'}, status = 200)
