@@ -49,7 +49,7 @@ class AccountBookView(View):
         try:
             data           = json.loads(request.body)
             accountbook_id = data['book_id']
-            is_deleted     = data['is_deleted']
+            is_deleted     = False
             
             accountbooks   = AccountBook.objects.get(
               id           = accountbook_id, 
