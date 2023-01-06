@@ -39,7 +39,7 @@ $ python manage.py runserver 0:8000
 
 ### DB모델링
 
-[Untitled](https://user-images.githubusercontent.com/102202607/210957341-85e6b6be-078d-49bd-8624-ec94a4c09cc8.png)
+![Untitled](https://user-images.githubusercontent.com/102202607/210957341-85e6b6be-078d-49bd-8624-ec94a4c09cc8.png)
 
 ## 구현 기능에 대한 소개
 
