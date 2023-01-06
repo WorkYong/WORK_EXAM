@@ -86,14 +86,16 @@ $ python manage.py runserver 0:8000
   사용자에서 요청한 user_id의 컬럼이  
   is_active가 0으로 바뀌면서 soft delete 처리됩니다.
 ```
-</details>      
+</details>
 
 <details>
-<summary>2.  가계부(로그인시만가능)</summary>
+<summary>2.가계부(로그인시만가능)</summary>
+
 - 가계부 생성하기
 ```shell    
 ※ 필수 요청값(book_name) 요청 값으로 받습니다.
-  한 아이디에 중복된 이름의 가계부를 만들 수는 없습니다(상세내역은 상관 없습니다.
+  한 아이디에 중복된 이름의 가계부를 만들 수는 없습니다(상세내역은 상관 없습니다.)
+  ex)가계부의 이름이기 떄문에 홍길동-절약하자, 홍길동-절약하자(중복이라 안댐) (단,홍길동-절약하자 , 김철수-절약하자 가능합니다)
 ```
 - 가계부 내역 수정하기
 ```shell
@@ -104,12 +106,13 @@ $ python manage.py runserver 0:8000
 - 가계부 내역 삭제하기
 ```shell
 ※필수 요청값(book_id) 요청 값으로 받습니다.
- DELETE라는 메시지와 함꼐 수정됩니다. 그리고 deleted_at이 자동으로 현재시간에 맞게 DB에 저장됩니다.
+  DELETE라는 메시지와 함꼐 수정됩니다. 그리고 deleted_at이 자동으로 현재시간에 맞게 DB에 저장됩니다.
 ```
-```shell    
+    
 - 가계부 원하는내역 조회하기       
-자신이 로그인된 ID의 정보를 조회하여 가져옵니다.
-로그인이 안되어 있을시 조회가 불가능하며 INVALID_TOKEN이라는 에러메세지를 반환합니다.
+```shell  
+  자신이 로그인된 ID의 정보를 조회하여 가져옵니다.
+  로그인이 안되어 있을시 조회가 불가능하며 INVALID_TOKEN이라는 에러메세지를 반환합니다.
 ```
 </details>
 
@@ -117,37 +120,47 @@ $ python manage.py runserver 0:8000
 <summary>3.가계부 상세내역</summary>
 
 - 가계부 상세내역 생성하기
-
+```shell
 ※필수 요청값(title, date, memo, description, amount, balance, book_id) 요청 값으로 받습니다.
   
     상세내역마다 랜덤의 serial_no를 부여하였습니다. 그 이유는 조회할때 QueryString을 사용하는데 
   
     serial_no 랜덤성을 이용하여 보안적측면을 고려하였습니다
-
+```
+    
 - 가계부 상세내역 수정하기
+```shell
   ※필수 요청값(record_id, amount, memo) 요청 값으로 받습니다.
   
     존재하지않는  record_id면 BookRecord_DoesNotExist 에러 값을 반환합니다.
   
     유효성검사가 다끝나면 CHANGE라는 메시지와 함꼐 수정됩니다
+```    
 - 가계부 상세내역 삭제하기
- 
+```shell
 ※필수 요청값(record_id) 요청 값으로 받습니다.
   존재하지않는  record_id면 BookRecord_DoesNotExist 에러 값을 반환합니다.
   
   유효성검사가 다끝나면 DELETE라는 메시지와 함께 is_delete값이 0 바뀌는 soft_delet처리 하였습니다.
   
   지금 현재시각이 deleted_at에 기록됩니다.
-      
+```  
 - 가계부 상세내역 조회하기
+```shell
 필수 요청값(book_id, is_deleted, serial_no) QueryString으로 요청 값으로 받습니다.
-요청된 값의 따라 정보를 조회할 수 있고 삭제된 데이터 또한 조회할 수 있습니다.
-그리고 QueryString의 단점인 URL에 노출되어 무분별하게 URL값을 변경하여 조회할 수 있는 사항이 우려되어
-uuid라는 모듈을 통하여 serial_no를 16자리에 숫자가 랜덤하게 생성되어 조회할 수 어렵게 만들어
-보안적 측면을 고려하였습니다
-- 가계부 상세내역 공유해서 단축URL 만들기(단축시간만료는 미구현)
+  요청된 값의 따라 정보를 조회할 수 있고 삭제된 데이터 또한 조회할 수 있습니다.
+  
+  그리고 QueryString의 단점인 URL에 노출되어 무분별하게 URL값을 변경하여 조회할 수 있는 사항이 우려되어
+  
+  uuid라는 모듈을 통하여 serial_no를 16자리에 숫자가 랜덤하게 생성되어 조회할 수 어렵게 만들어
+  
+  보안적 측면을 고려하였습니다
+```
+- 가계부 상세내역 공유해서 단축URL 만들기(단축시간 만료는 미구현)
+```shell  
 상세내역을 조회하게되면 그 동시에 URL이 단축 URL로 결과 값을 반환합니다.
-QueryString이기 떄문에 URL이 겹치지 않습니다
+QueryString이기 떄문에 URL이 겹치지 않습니다.
+```  
 - 가계부 상세내역 복제하기
 
 4.  테스트코드
