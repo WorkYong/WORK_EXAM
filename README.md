@@ -176,7 +176,7 @@ QueryStringParameter의 값이 변화하기 떄문에 URL이 겹치지 않습니
 <summary>4. 테스트코드</summary>
 </details>
 <details>
-<summary>5. 테스트 케이스에 따른 요청과 응답에 대한 자세한 결과</summary>
+<summary>5. 테스트 케이스에 따른 요청과 응답에 대한 결과</summary>
 <div markdown="1">
 <ul>
   <li>
