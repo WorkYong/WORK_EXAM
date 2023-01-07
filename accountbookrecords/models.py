@@ -4,6 +4,11 @@ from users.models        import User
 from accountbooks.models import AccountBook
 from core.models         import TimeStampModel
 
+'''
+가계부 상세내역 모델링 입니다.
+(메모 , 수익 , 지출 ,잔액) 을 생성,조회,삭제,수정 할 수 있습니다.
+'''
+
 class AccountBookRecord(TimeStampModel): 
     title        = models.CharField(max_length = 100)
     date         = models.CharField(max_length = 150)
