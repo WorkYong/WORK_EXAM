@@ -78,7 +78,7 @@ $ python manage.py runserver 0:8000
   이메일과 비밀번호가 일치하게 되면 로그인이 완료되며 JWT 토큰을 발행합니다.
   이메일 혹은 비밀번호가 불일치시 INVAILD_USER라는 문구가 발생합니다.
 ```
-- 회원 로그아웃 하기
+- 회원 로그아웃 하기(미구현)
 
 - 회원 탈퇴하기(로그인시만가능)
 ```shell
@@ -165,10 +165,10 @@ $ python manage.py runserver 0:8000
   
   QueryStringParameter 속에 앞서 설명한 serial_no를 넣어 보안적 측면을 고려하였습니다.
 ```
-- 가계부 상세내역 공유해서 단축URL 만들기
+- 가계부 상세내역 공유해서 단축URL 만들기(단축시간 만료는 미구현)
 ```shell  
 QueryStringParameter로 상세내역을 조회하게 되면 그 동시에 단축URL 결과 값을 반환합니다.
-QueryStringParameter의 값이 변화하기 떄문에 URL이 겹치지 않습니다.
+QueryStringParameter의 값이 변화하기 문에 URL이 겹치지 않습니다.
 ```  
 - 가계부 상세내역 복제하기
 </details>
