@@ -173,10 +173,7 @@ QueryStringParameter의 값이 변화하기 떄문에 URL이 겹치지 않습니
 - 가계부 상세내역 복제하기
 </details>
 <details>
-<summary>4. 테스트코드</summary>
-</details>
-<details>
-<summary>5. 테스트 케이스에 따른 요청과 응답에 대한 결과</summary>
+<summary>4. 테스트 케이스에 따른 요청과 응답에 대한 결과</summary>
 <div markdown="1">
 <ul>
   <li>
@@ -231,7 +228,7 @@ QueryStringParameter의 값이 변화하기 떄문에 URL이 겹치지 않습니
 </div>
 </details>
 <details>
-<summary>6. API docs</summary>
+<summary>5. API docs</summary>
 
 ## API doc
 [https://repeated-cosmonaut-832.notion.site/payhere-AccountBook-78d0f08c042c42a1a7fb57353c9b0f73]
